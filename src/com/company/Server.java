@@ -30,8 +30,14 @@ public class Server {
             dataOutputStream.writeUTF("Server is Ready ...");
 
             // Accept the message and print it
-            String clientMess = dataInputStream.readUTF();
-            System.out.println("Client Message : " + clientMess);
+            while (true){
+                String clientMess = dataInputStream.readUTF();
+                if (clientMess.equals("stop")){
+                    System.out.println("Server Shut Down :(");
+                    break;
+                }
+                System.out.println("Client Message : " + clientMess);
+            }
 
             // Close all Resources ...
             dataInputStream.close();

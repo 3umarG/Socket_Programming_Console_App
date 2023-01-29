@@ -22,10 +22,18 @@ public class Client {
             System.out.println(dataInputStream.readUTF());
 
             // Write Message and send it to server ...
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Please Enter Your Message : ");
-            String clientMess = scanner.nextLine();
-            dataOutputStream.writeUTF(clientMess);
+            while (true) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Please Enter Your Message : ");
+                String clientMess = scanner.nextLine();
+                if (clientMess.equals("stop")) {
+                    System.out.println("Client want to stop connection");
+                    dataOutputStream.writeUTF(clientMess);
+                    break;
+                } else {
+                    dataOutputStream.writeUTF(clientMess);
+                }
+            }
 
             // Close our Resources ...
             dataOutputStream.close();
